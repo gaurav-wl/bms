@@ -1,3 +1,5 @@
+.idea
+vendor
 .htaccess
 css.php
 rpc/
