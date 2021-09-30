@@ -2,7 +2,7 @@ package server
 
 import (
 	"errors"
-	"github.com/bms/dbModels"
+	"github.com/gauravcoco/bms/dbModels"
 	"net/http"
 )
 

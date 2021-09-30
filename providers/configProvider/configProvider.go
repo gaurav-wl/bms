@@ -1,7 +1,7 @@
 package configProvider
 
 import (
-	"github.com/bms/providers"
+	"github.com/gauravcoco/bms/providers"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sirupsen/logrus"
 	"os"

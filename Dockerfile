@@ -1,6 +1,6 @@
 FROM golang:1.16.6-alpine3.14 AS builder
 RUN apk update && apk add --no-cache git ca-certificates && update-ca-certificates
-WORKDIR $GOPATH/src/github.com/bms/
+WORKDIR $GOPATH/src/github.com/gauravcoco/bms/
 ENV GO111MODULE=on
 COPY go.mod .
 COPY go.sum .

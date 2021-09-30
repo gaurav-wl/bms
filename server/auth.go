@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/bms/dbModels"
+	"github.com/gauravcoco/bms/dbModels"
 	"time"
 )
 

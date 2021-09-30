@@ -1,7 +1,7 @@
 package dbProvider
 
 import (
-	"github.com/bms/providers"
+	"github.com/gauravcoco/bms/providers"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"

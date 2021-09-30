@@ -1,6 +1,6 @@
 package main
 
-import "github.com/bms/server"
+import "github.com/gauravcoco/bms/server"
 
 func main() {
 	server.Run()

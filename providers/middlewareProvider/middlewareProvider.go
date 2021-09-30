@@ -1,7 +1,7 @@
 package middlewareProvider
 
 import (
-	"github.com/bms/providers"
+	"github.com/gauravcoco/bms/providers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/jmoiron/sqlx"

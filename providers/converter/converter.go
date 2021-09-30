@@ -1,10 +1,10 @@
 package converter
 
 import (
-	"github.com/bms/dbModels"
-	"github.com/bms/models"
-	"github.com/bms/providers"
-	"github.com/bms/utils"
+	"github.com/gauravcoco/bms/dbModels"
+	"github.com/gauravcoco/bms/models"
+	"github.com/gauravcoco/bms/providers"
+	"github.com/gauravcoco/bms/utils"
 )
 
 type converter struct{}

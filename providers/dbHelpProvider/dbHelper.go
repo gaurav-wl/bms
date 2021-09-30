@@ -2,11 +2,11 @@ package dbHelpProvider
 
 import (
 	"context"
-	"github.com/bms/db"
-	"github.com/bms/dbModels"
-	"github.com/bms/models"
-	"github.com/bms/providers"
-	"github.com/bms/sql"
+	"github.com/gauravcoco/bms/db"
+	"github.com/gauravcoco/bms/dbModels"
+	"github.com/gauravcoco/bms/models"
+	"github.com/gauravcoco/bms/providers"
+	"github.com/gauravcoco/bms/sql"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	"golang.org/x/sync/errgroup"

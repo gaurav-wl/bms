@@ -1,14 +1,14 @@
 package server
 
 import (
-	dbPackage "github.com/bms/db"
-	"github.com/bms/providers"
-	"github.com/bms/providers/configProvider"
-	"github.com/bms/providers/converter"
-	"github.com/bms/providers/dbHelpProvider"
-	"github.com/bms/providers/dbProvider"
-	"github.com/bms/providers/keyProvider"
-	"github.com/bms/providers/middlewareProvider"
+	dbPackage "github.com/gauravcoco/bms/db"
+	"github.com/gauravcoco/bms/providers"
+	"github.com/gauravcoco/bms/providers/configProvider"
+	"github.com/gauravcoco/bms/providers/converter"
+	"github.com/gauravcoco/bms/providers/dbHelpProvider"
+	"github.com/gauravcoco/bms/providers/dbProvider"
+	"github.com/gauravcoco/bms/providers/keyProvider"
+	"github.com/gauravcoco/bms/providers/middlewareProvider"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"time"

@@ -1,7 +1,7 @@
 package keyProvider
 
 import (
-	"github.com/bms/providers"
+	"github.com/gauravcoco/bms/providers"
 	"github.com/sirupsen/logrus"
 	"github.com/teris-io/shortid"
 )

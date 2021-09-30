@@ -1,8 +1,8 @@
 package server
 
 import (
-	bmsError "github.com/bms/errors"
-	"github.com/bms/utils"
+	bmsError "github.com/gauravcoco/bms/errors"
+	"github.com/gauravcoco/bms/utils"
 	"net/http"
 )
 

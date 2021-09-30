@@ -2,8 +2,8 @@ package providers
 
 import (
 	"context"
-	"github.com/bms/dbModels"
-	"github.com/bms/models"
+	"github.com/gauravcoco/bms/dbModels"
+	"github.com/gauravcoco/bms/models"
 	"github.com/go-chi/chi"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
