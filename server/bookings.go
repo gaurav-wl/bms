@@ -24,7 +24,7 @@ func (srv *Server) getAllBookings(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	utils.EncodeJSONBody(resp, http.StatusOK, map[string]interface{}{
-		"movieDetails": srv.Converter.ToBookings(bookings),
+		"bookings": srv.Converter.ToBookings(bookings),
 	})
 }
 
@@ -51,6 +51,6 @@ func (srv *Server) book(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	utils.EncodeJSONBody(resp, http.StatusCreated, map[string]interface{}{
-		"movieDetails": srv.Converter.ToBooking(bookingDetails),
+		"bookingDetails": srv.Converter.ToBooking(bookingDetails),
 	})
 }
