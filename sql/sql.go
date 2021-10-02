@@ -2,22 +2,10 @@ package sql
 
 //language=SQL
 const (
-
 	CreateNewUserSQL = `INSERT INTO users
 						(name, email, password)
 						 VALUES ($1, $2, $3)
 						 RETURNING id`
-
-	GetUserByIdSQL = `SELECT
-						id,  
-						name, 
-						email, 
-						password
-					  FROM
-						 users 
-					  WHERE
-						  id = $1 AND 
-						  archived_at IS NULL`
 
 	GetUserInfoByIdSQL = `SELECT
 							id,  
@@ -39,10 +27,8 @@ const (
 									  uuid = $1 AND 
 									  archived_at IS NULL`
 
-
 	MovieShowDetailsSQL = `SELECT 
-								DISTINCT movies.id AS movie_id,
-								show_timings.id AS show_id,
+								DISTINCT show_timings.id AS show_id,
 								show_timings.show_start_time,
 								show_timings.show_end_time,
 								theater.id AS theater_id,
@@ -55,17 +41,16 @@ const (
 							JOIN show_timings ON show_timings.movie_id = movies.id AND show_timings.theater_id = theater.id
 							WHERE
 								movies.id = $1 AND
-								mts.booking_start_time > now() AND 
-								mts.status = 'ongoing' AND 
+								mts.booking_start_time < now() AND
+								mts.status <> 'closed' AND
 								mts.archived_at IS NULL AND 
 								show_timings.show_start_time > now() + '15 minutes'::INTERVAL AND 
-								show_timings.archived_at IS NULL AND 
-								show_timings.show_end_time::DATE < now()::DATE + '10 DAYS'::INTERVAL				
+								show_timings.archived_at IS NULL 				
 `
 
-	MovieDetailsSQL  = `SELECT 
+	MovieDetailsSQL = `SELECT 
 							movies.id,
-							movies.name,
+							movies.title AS name,
 							movies.release_date,
 							movies.duration_in_minutes,
 							movie_dimensions.dimensions,
@@ -78,13 +63,11 @@ const (
 						) movie_dimensions ON TRUE
 						JOIN LATERAL (
 								SELECT ARRAY_AGG(ml.language) AS languages
-								FROM movie_languages ml 
+								FROM movie_language ml 
 								WHERE ml.movie_id = movies.id
 						) movie_languages ON TRUE
 						WHERE 
 							movies.id = $1 AND 
 							archived_at IS NULL
 							`
-
-
 )

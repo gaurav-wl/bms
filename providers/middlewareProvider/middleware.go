@@ -60,7 +60,7 @@ func authMiddleware(db *sqlx.DB, jwtKey string) func(next http.Handler) http.Han
 					return
 				}
 				logrus.Errorf("Error parsing jwt %v", err)
-				w.WriteHeader(http.StatusBadRequest)
+				bmsError.RespondClientErr(w, r, errors.New("token expired"), http.StatusBadRequest, "token expired")
 				return
 			}
 			if !tkn.Valid {

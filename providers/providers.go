@@ -45,20 +45,31 @@ type DBHelpProvider interface {
 	GetAllMovies(ctx context.Context, req models.MovieSearchRequest) ([]dbModels.Movie, error)
 	GetMovieDetails(ctx context.Context, id int) (*dbModels.MovieDetails, error)
 	GetMovieShowDetails(ctx context.Context, id int) (*dbModels.MovieShowDetails, error)
-	GetShowSeats(ctx context.Context, showID int) ([]dbModels.ShowSeats, error)
-	BookMovieTicket(ctx context.Context, request models.BookingRequest) (models.BookingDetails, error)
+	GetShowSeats(ctx context.Context, showID int) (dbModels.ShowSeats, error)
+	BookMovieTicket(ctx context.Context, request models.BookingRequest) (dbModels.Booking, error)
 	GetMovieBannerImages(ctx context.Context, ids pq.Int64Array) (map[int][]dbModels.Image, error)
 	GetMovieCastImages(ctx context.Context, id int) (map[int]dbModels.Image, error)
+	GetAllUserBookings(ctx context.Context, userID int) ([]dbModels.Booking, error)
+	GetBookingsSeats(ctx context.Context, bookingIDs pq.Int64Array) (map[int][]dbModels.BookingSeats, error)
+	GetBookingByID(ctx context.Context, bookingID int) (dbModels.Booking, error)
 }
 
 type Converter interface {
+	EnumConverter
 	ToUser(user *dbModels.User) *models.User
 	ToMovies(movies []dbModels.Movie) []models.Movie
 	ToMovie(movie dbModels.Movie) models.Movie
 	ToMovieDetails(movieDetails dbModels.MovieDetails) models.MovieDetails
 	ToMovieCasts(casts []dbModels.Cast) []models.Cast
 	ToMovieCast(cast dbModels.Cast) models.Cast
-	ToMovieShowDetails(show dbModels.MovieShowDetails) models.ShowDetails
+	ToMovieShowDetails(show dbModels.MovieShowDetails) models.MovieShowDetails
+	ToBooking(booking dbModels.Booking) models.BookingDetails
+	ToBookings(bookings []dbModels.Booking) []models.BookingDetails
+	ToSeatsDetails(seatsDetails dbModels.ShowSeats) models.ShowSeats
+}
+
+type EnumConverter interface {
+	ToBookingStatus(user dbModels.BookingStatus) models.BookingStatus
 }
 
 type MigrationProvider interface {

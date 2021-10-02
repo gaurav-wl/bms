@@ -16,7 +16,7 @@ type MovieSearchRequest struct {
 type MovieShowDetails struct {
 	ID                int           `json:"id"`
 	Name              string        `json:"name"`
-	Dimension         []string      `json:"dimension"`
+	Dimensions        []string      `json:"dimensions"`
 	Language          []string      `json:"languages"`
 	City              City          `json:"city"`
 	DurationInMinutes int           `json:"duration_in_minutes"`
@@ -27,6 +27,7 @@ type Movie struct {
 	ID                int       `json:"id"`
 	Name              string    `json:"name"`
 	Languages         []string  `json:"languages"`
+	Dimensions        []string  `json:"dimensions"`
 	ReleaseDate       time.Time `json:"releaseDate"`
 	DurationInMinutes int       `json:"duration_in_minutes"`
 	Banners           []string  `json:"banners"` // Image URLS
@@ -35,7 +36,7 @@ type Movie struct {
 type MovieDetails struct {
 	ID                int       `json:"id"`
 	Name              string    `json:"name"`
-	Dimension         []string  `json:"dimension"`
+	Dimensions        []string  `json:"dimensions"`
 	Language          []string  `json:"languages"`
 	ReleaseDate       time.Time `json:"releaseDate"`
 	DurationInMinutes int       `json:"duration_in_minutes"`
@@ -53,14 +54,8 @@ type City struct {
 	Name string `json:"name"`
 }
 
-type Point struct {
-	Lat  float64 `json:"lat"`
-	Long float64 `json:"long"`
-}
-
 type ShowDetails struct {
 	Theater Theater       `json:"theater"`
-	Movie   Movie         `json:"movie"`
 	Shows   []ShowTimings `json:"shows"`
 }
 
@@ -68,7 +63,7 @@ type Theater struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	City     string `json:"city"`
-	Location Point  `json:"location"`
+	Location *LongLat  `json:"location"`
 	Address  string `json:"string"`
 }
 
@@ -83,4 +78,9 @@ type Shows struct {
 	EndTime   time.Time `json:"endTime"`
 	Dimension string    `json:"dimension"`
 	Language  string    `json:"language"`
+}
+
+type LongLat struct {
+	Longitude float64 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
 }

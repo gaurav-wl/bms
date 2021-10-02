@@ -98,7 +98,7 @@ func (srv *Server) loginUser(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	utils.EncodeJSONBody(resp, http.StatusCreated, struct {
+	utils.EncodeJSONBody(resp, http.StatusOK, struct {
 		Token string `json:"token"`
 	}{
 		Token: token,
@@ -110,17 +110,17 @@ func (srv *Server) getAllMovies(resp http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&movieSearchRequest)
 	if err != nil {
-		bmsError.RespondClientErr(resp, req, err, http.StatusBadRequest, "Error parsing request", "Error parsing login request")
+		bmsError.RespondClientErr(resp, req, err, http.StatusBadRequest, "Error parsing request", "Error parsing movies search request")
 		return
 	}
 
 	movies, err := srv.DBHelper.GetAllMovies(req.Context(), movieSearchRequest)
 	if err != nil {
-		bmsError.RespondClientErr(resp, req, err, http.StatusInternalServerError, "Error parsing request", "Error getting getAllMovies")
+		bmsError.RespondClientErr(resp, req, err, http.StatusInternalServerError, "Failed to get movies", "Error getting getAllMovies")
 		return
 	}
 
-	utils.EncodeJSONBody(resp, http.StatusCreated, map[string]interface{}{
+	utils.EncodeJSONBody(resp, http.StatusOK, map[string]interface{}{
 		"movies": srv.Converter.ToMovies(movies),
 	})
 }
@@ -138,7 +138,7 @@ func (srv *Server) getMovieDetails(resp http.ResponseWriter, req *http.Request) 
 		return
 	}
 
-	utils.EncodeJSONBody(resp, http.StatusCreated, map[string]interface{}{
+	utils.EncodeJSONBody(resp, http.StatusOK, map[string]interface{}{
 		"movieDetails": srv.Converter.ToMovieDetails(*movie),
 	})
 }
@@ -156,7 +156,25 @@ func (srv *Server) getMovieShowDetails(resp http.ResponseWriter, req *http.Reque
 		return
 	}
 
-	utils.EncodeJSONBody(resp, http.StatusCreated, map[string]interface{}{
-		"movieDetails": srv.Converter.ToMovieShowDetails(*showDetails),
+	utils.EncodeJSONBody(resp, http.StatusOK, map[string]interface{}{
+		"movieShowDetails": srv.Converter.ToMovieShowDetails(*showDetails),
+	})
+}
+
+func (srv *Server) getShowSeatsDetails(resp http.ResponseWriter, req *http.Request) {
+	showID, err := strconv.Atoi(chi.URLParam(req, "showID"))
+	if err != nil {
+		bmsError.RespondClientErr(resp, req, err, http.StatusBadRequest, "Error parsing show id", "Error parsing show id to int")
+		return
+	}
+
+	showSeatDetails, err := srv.DBHelper.GetShowSeats(req.Context(), showID)
+	if err != nil {
+		bmsError.RespondClientErr(resp, req, err, http.StatusInternalServerError, "Error getting movie details", "Error getting show seat details#" + strconv.Itoa(showID))
+		return
+	}
+
+	utils.EncodeJSONBody(resp, http.StatusOK, map[string]interface{}{
+		"movieShowSeatDetails": srv.Converter.ToSeatsDetails(showSeatDetails),
 	})
 }

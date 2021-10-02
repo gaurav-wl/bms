@@ -9,19 +9,20 @@ func (srv *Server) InjectRoutes() *chi.Mux {
 	r.Use(srv.Middlewares.Default()...)
 	r.Get(`/health`, srv.healthCheck)
 	r.Route("/api", func(api chi.Router) {
+		api.Post("/movies", srv.getAllMovies)
+		api.Get("/movie/{movieID}", srv.getMovieDetails)
+		api.Get("/movie_shows/{movieID}", srv.getMovieShowDetails)
+
 		api.Route("/user", func(public chi.Router) {
 			public.Post("/register", srv.registerNewUser)
 			public.Post("/login", srv.loginUser)
 
-			public.Post("/movies", srv.getAllMovies)
-			public.Get("/movie/{id}", srv.getMovieDetails)
-			public.Get("/movie_shows/{id}", srv.getMovieShowDetails)
-
 			public.Route("/", func(user chi.Router) {
 				user.Use(srv.Middlewares.AUTH()...)
 				user.Get("/info", srv.userInfo)
-				user.Post("/book", srv.userInfo)
-				user.Get("/bookings", srv.userInfo)
+				user.Post("/book", srv.book)
+				public.Get("/seats/{showID}", srv.getShowSeatsDetails)
+				user.Get("/bookings", srv.getAllBookings)
 			})
 		})
 	})

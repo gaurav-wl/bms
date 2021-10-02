@@ -1,4 +1,5 @@
 module github.com/gauravcoco/bms
+
 // +heroku goVersion go1.16
 go 1.16
 
@@ -11,6 +12,8 @@ require (
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.3
+	github.com/paulmach/go.geo v0.0.0-20180829195134-22b514266d33
+	github.com/paulmach/go.geojson v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/teris-io/shortid v0.0.0-20201117134242-e59966efd125
 	github.com/volatiletech/inflect v0.0.1 // indirect

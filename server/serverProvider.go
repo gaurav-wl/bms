@@ -44,12 +44,14 @@ func serverInit() *Server {
 	// Migrations Up
 	dbPackage.NewMigrationProvider(db.DB()).Up()
 
+	kp := keyProvider.NewKeyProvider()
+
 	return &Server{
 		PSQL:        db,
 		Config:      config,
 		Middlewares: middlewareProvider.NewMiddleware(db.DB(), config.GetJWTKey()),
-		KeyProvider: keyProvider.NewKeyProvider(),
-		DBHelper:    dbHelpProvider.NewDBHelper(db.DB()),
+		KeyProvider: kp,
+		DBHelper:    dbHelpProvider.NewDBHelper(db.DB(), kp),
 		Converter:   converter.NewConverter(),
 	}
 }
